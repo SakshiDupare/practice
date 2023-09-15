@@ -1,0 +1,25 @@
+/*write a  program to create a class Student1 having data members as Stu_id,Stu_Name,Stu_rollno.Display the student details for two objects with parameterized constructor.
+public class Student1
+{
+int Stu_id;
+String Stu_Name;
+int Stu_rollno;
+Student1(int id,String n,int r);
+{
+Stu_id=id;
+Stu_Name=n;
+Stu_rollno=r;
+}
+void display()
+{
+System.out.println("*****STUDENT DETAILS******);
+System.out.println(Stu_id+" "+Stu_Name+" "+Stu_rollno);
+}
+public static void main(String [] args)
+{
+Student1 s1 = new Student1(220300018,"SAKSHI",121);
+Student1 s2 = new Student1(220300011,"SAMIKSHA",122);
+s1.display();
+s2.display();
+}
+}
