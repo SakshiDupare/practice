@@ -1,0 +1,39 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+#include<math.h>
+int main() 
+{
+    int mynum,usernum;
+    srand(time(NULL));
+    mynum=rand()%10;
+    cout<<" I have a number in mind(0-100).Can you guess it?"<<endl;;
+    cout<<" Let's start the game"<<endl;
+    cout<<"*****************ALL THE BEST******************"<<endl;
+    while(1)
+    {
+        cout<<"Enter your guess:"<<endl;
+        cin>>usernum;
+        if(mynum==usernum)
+        {
+            cout<<" Congratulations! You guessed the correct number"<<endl;
+            cout<<" You did well!"<<endl;
+            cout<<" Amazing!!"<<endl;
+            cout<<" You can play again!!"<<endl;
+            cout<<"----------------------------------------------"<<endl;
+            break;
+        }
+        else if(mynum>usernum)
+        {
+            cout<<" My number is greater than "<< usernum<<endl;
+            cout<<"Try again!!!"<<endl;
+        }
+        else
+        {
+            cout<<" My number is less than "<<usernum<<endl;
+            cout<<"Try again!!!"<<endl;
+            
+        }
+    }
+    return 0;
+}
