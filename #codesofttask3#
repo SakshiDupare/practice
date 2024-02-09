@@ -1,0 +1,112 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Task structure to store task details
+struct Task {
+    string description;
+
+    Task(const string& desc) : description(desc) {}
+};
+
+// Function to add a task to the list
+void addTask(Task*& tasks, int& size) {
+    string description;
+    cout << "Enter task description: ";
+    getline(cin, description);
+
+    Task* newTasks = new Task[size + 1]; // Allocate memory for one additional task
+    // Copy existing tasks to new array
+    for (int i = 0; i < size; ++i) {
+        newTasks[i] = tasks[i];
+    }
+    newTasks[size] = Task(description); // Add new task
+    delete[] tasks; // Free memory of old array
+    tasks = newTasks; // Update tasks pointer
+    size++; // Update size
+    cout << "Task added successfully!\n";
+}
+
+// Function to remove a task from the list
+void removeTask(Task*& tasks, int& size) {
+    if (size == 0) {
+        cout << "No tasks to remove\n";
+        return;
+    }
+
+    cout << "Enter the index of the task to remove: ";
+    int index;
+    cin >> index;
+    cin.ignore(); // Consume newline character
+
+    if (index < 1 || index > size) {
+        cout << "Invalid index!\n";
+        return;
+    }
+
+    Task* newTasks = new Task[size - 1]; // Allocate memory for new array
+    // Copy tasks before the removed task
+    for (int i = 0; i < index - 1; ++i) {
+        newTasks[i] = tasks[i];
+    }
+    // Copy tasks after the removed task
+    for (int i = index; i < size; ++i) {
+        newTasks[i - 1] = tasks[i];
+    }
+    delete[] tasks; // Free memory of old array
+    tasks = newTasks; // Update tasks pointer
+    size--; // Update size
+    cout << "Task removed successfully!\n";
+}
+
+// Function to display all tasks
+void displayTasks(const Task* tasks, int size) {
+    if (size == 0) {
+        cout << "No tasks to display\n";
+        return;
+    }
+
+    cout << "Tasks:\n";
+    for (int i = 0; i < size; ++i) {
+        cout << i + 1 << ". " << tasks[i].description << endl;
+    }
+}
+
+// Main function to run the To-Do List program
+int main() {
+    Task* tasks = nullptr;
+    int size = 0;
+    int choice;
+
+    do {
+        cout << "\nTo-Do List\n";
+        cout << "1. Add Task\n";
+        cout << "2. Remove Task\n";
+        cout << "3. Display Tasks\n";
+        cout << "4. Quit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore(); // Consume newline character
+
+        switch (choice) {
+            case 1:
+                addTask(tasks, size);
+                break;
+            case 2:
+                removeTask(tasks, size);
+                break;
+            case 3:
+                displayTasks(tasks, size);
+                break;
+            case 4:
+                cout << "Quitting...\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+        }
+    } while (choice != 4);
+
+    delete[] tasks; // Free memory before quitting
+    return 0;
+}
